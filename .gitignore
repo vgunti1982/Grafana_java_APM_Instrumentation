@@ -1,0 +1,7 @@
+.idea/
+.mvn/
+target/
+logs/
+.DS_Store
+otel-javaagent.jar
+

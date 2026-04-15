@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: sdk-app
+
+server:
+  port: 8083
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  file:
+    name: logs/sdk-app.log
+  pattern:
+    level: "%5p trace_id=%X{trace_id:-} span_id=%X{span_id:-}"
+
