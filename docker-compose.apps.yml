@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  agent-app:
+    container_name: agent-app
+    image: agent-app:latest
+    build:
+      context: .
+      dockerfile: agent-app/Dockerfile
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_PROFILES_ACTIVE=container
+    networks:
+      - java-apps
+    depends_on:
+      - api-app
+      - sdk-app
+
+  api-app:
+    container_name: api-app
+    image: api-app:latest
+    build:
+      context: .
+      dockerfile: api-app/Dockerfile
+    ports:
+      - "8082:8082"
+    environment:
+      - SPRING_PROFILES_ACTIVE=container
+    networks:
+      - java-apps
+
+  sdk-app:
+    container_name: sdk-app
+    image: sdk-app:latest
+    build:
+      context: .
+      dockerfile: sdk-app/Dockerfile
+    ports:
+      - "8083:8083"
+    environment:
+      - SPRING_PROFILES_ACTIVE=container
+    networks:
+      - java-apps
+
+networks:
+  java-apps:
+    driver: bridge
